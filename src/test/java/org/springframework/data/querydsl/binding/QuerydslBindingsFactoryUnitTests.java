@@ -57,7 +57,6 @@ public class QuerydslBindingsFactoryUnitTests {
 	 * @see DATACMNS-669
 	 */
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void createBindingsShouldHonorQuerydslBinderCustomizerHookWhenPresent() {
 
 		Repositories repositories = mock(Repositories.class);
@@ -82,7 +81,6 @@ public class QuerydslBindingsFactoryUnitTests {
 	 * @see DATACMNS-669
 	 */
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void shouldReuseExistingQuerydslBinderCustomizer() {
 
 		AutowireCapableBeanFactory beanFactory = mock(AutowireCapableBeanFactory.class);
