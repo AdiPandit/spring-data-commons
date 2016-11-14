@@ -15,8 +15,7 @@
  */
 package org.springframework.data.convert;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -79,8 +78,8 @@ public class Jsr310ConvertersUnitTests {
 		 */
 		@Test
 		public void convertsDateToLocalDateTime() {
-			assertThat(CONVERSION_SERVICE.convert(NOW, LocalDateTime.class).toString(),
-					is(format(NOW, "yyyy-MM-dd'T'HH:mm:ss.SSS")));
+			assertThat(CONVERSION_SERVICE.convert(NOW, LocalDateTime.class).toString())
+					.isEqualTo(format(NOW, "yyyy-MM-dd'T'HH:mm:ss.SSS"));
 		}
 
 		/**
@@ -90,7 +89,8 @@ public class Jsr310ConvertersUnitTests {
 		public void convertsLocalDateTimeToDate() {
 
 			LocalDateTime now = LocalDateTime.now();
-			assertThat(format(CONVERSION_SERVICE.convert(now, Date.class), "yyyy-MM-dd'T'HH:mm:ss.SSS"), is(now.toString()));
+			assertThat(format(CONVERSION_SERVICE.convert(now, Date.class), "yyyy-MM-dd'T'HH:mm:ss.SSS"))
+					.isEqualTo(now.toString());
 		}
 
 		/**
@@ -98,7 +98,7 @@ public class Jsr310ConvertersUnitTests {
 		 */
 		@Test
 		public void convertsDateToLocalDate() {
-			assertThat(CONVERSION_SERVICE.convert(NOW, LocalDate.class).toString(), is(format(NOW, "yyyy-MM-dd")));
+			assertThat(CONVERSION_SERVICE.convert(NOW, LocalDate.class).toString()).isEqualTo(format(NOW, "yyyy-MM-dd"));
 		}
 
 		/**
@@ -108,7 +108,7 @@ public class Jsr310ConvertersUnitTests {
 		public void convertsLocalDateToDate() {
 
 			LocalDate now = LocalDate.now();
-			assertThat(format(CONVERSION_SERVICE.convert(now, Date.class), "yyyy-MM-dd"), is(now.toString()));
+			assertThat(format(CONVERSION_SERVICE.convert(now, Date.class), "yyyy-MM-dd")).isEqualTo(now.toString());
 		}
 
 		/**
@@ -116,7 +116,7 @@ public class Jsr310ConvertersUnitTests {
 		 */
 		@Test
 		public void convertsDateToLocalTime() {
-			assertThat(CONVERSION_SERVICE.convert(NOW, LocalTime.class).toString(), is(format(NOW, "HH:mm:ss.SSS")));
+			assertThat(CONVERSION_SERVICE.convert(NOW, LocalTime.class).toString()).isEqualTo(format(NOW, "HH:mm:ss.SSS"));
 		}
 
 		/**
@@ -126,7 +126,7 @@ public class Jsr310ConvertersUnitTests {
 		public void convertsLocalTimeToDate() {
 
 			LocalTime now = LocalTime.now();
-			assertThat(format(CONVERSION_SERVICE.convert(now, Date.class), "HH:mm:ss.SSS"), is(now.toString()));
+			assertThat(format(CONVERSION_SERVICE.convert(now, Date.class), "HH:mm:ss.SSS")).isEqualTo(now.toString());
 		}
 
 		/**
@@ -136,7 +136,7 @@ public class Jsr310ConvertersUnitTests {
 		public void convertsDateToInstant() {
 
 			Date now = new Date();
-			assertThat(CONVERSION_SERVICE.convert(now, Instant.class), is(now.toInstant()));
+			assertThat(CONVERSION_SERVICE.convert(now, Instant.class)).isEqualTo(now.toInstant());
 		}
 
 		/**
@@ -146,7 +146,7 @@ public class Jsr310ConvertersUnitTests {
 		public void convertsInstantToDate() {
 
 			Date now = new Date();
-			assertThat(CONVERSION_SERVICE.convert(now.toInstant(), Date.class), is(now));
+			assertThat(CONVERSION_SERVICE.convert(now.toInstant(), Date.class)).isEqualTo(now);
 		}
 
 		@Test
@@ -157,8 +157,8 @@ public class Jsr310ConvertersUnitTests {
 			ids.put("+06:00", ZoneId.of("+06:00"));
 
 			for (Entry<String, ZoneId> entry : ids.entrySet()) {
-				assertThat(CONVERSION_SERVICE.convert(entry.getValue(), String.class), is(entry.getKey()));
-				assertThat(CONVERSION_SERVICE.convert(entry.getKey(), ZoneId.class), is(entry.getValue()));
+				assertThat(CONVERSION_SERVICE.convert(entry.getValue(), String.class)).isEqualTo(entry.getKey());
+				assertThat(CONVERSION_SERVICE.convert(entry.getKey(), ZoneId.class)).isEqualTo(entry.getValue());
 			}
 		}
 
@@ -214,8 +214,8 @@ public class Jsr310ConvertersUnitTests {
 		public void convertsPeriodToStringAndBack() {
 
 			ResolvableType type = ResolvableType.forClass(ConversionTest.class, this.getClass());
-			assertThat(CONVERSION_SERVICE.convert(target, String.class), is(string));
-			assertThat(CONVERSION_SERVICE.convert(string, type.getGeneric(0).getRawClass()), is((Object) target));
+			assertThat(CONVERSION_SERVICE.convert(target, String.class)).isEqualTo(string);
+			assertThat(CONVERSION_SERVICE.convert(string, type.getGeneric(0).getRawClass())).isEqualTo(target);
 		}
 	}
 }

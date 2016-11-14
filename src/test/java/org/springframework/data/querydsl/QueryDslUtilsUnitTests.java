@@ -15,8 +15,7 @@
  */
 package org.springframework.data.querydsl;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.data.querydsl.QueryDslUtils.*;
 
 import org.junit.Test;
@@ -33,7 +32,7 @@ public class QueryDslUtilsUnitTests {
 	 */
 	@Test
 	public void rendersDotPathForPathTraversalContainingAnyExpression() {
-		assertThat(toDotPath(QUser.user.addresses.any().street), is("addresses.street"));
+		assertThat(QueryDslUtils.toDotPath(QUser.user.addresses.any().street)).isEqualTo("addresses.street");
 	}
 
 	/**
@@ -42,8 +41,8 @@ public class QueryDslUtilsUnitTests {
 	@Test
 	public void skipsIntermediateDelegates() {
 
-		assertThat(toDotPath(QUser.user.as(QSpecialUser.class).as(QSpecialUser.class).specialProperty),
-				is("specialProperty"));
-		assertThat(toDotPath(QUser.user.as(QSpecialUser.class).specialProperty), is("specialProperty"));
+		assertThat(toDotPath(QUser.user.as(QSpecialUser.class).as(QSpecialUser.class).specialProperty))
+				.isEqualTo("specialProperty");
+		assertThat(toDotPath(QUser.user.as(QSpecialUser.class).specialProperty)).isEqualTo("specialProperty");
 	}
 }
