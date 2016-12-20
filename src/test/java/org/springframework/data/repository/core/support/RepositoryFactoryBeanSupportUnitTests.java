@@ -56,7 +56,7 @@ public class RepositoryFactoryBeanSupportUnitTests {
 	public void initializationFailsWithMissingRepositoryInterface() {
 
 		assertThatExceptionOfType(IllegalArgumentException.class)//
-				.isThrownBy(() -> new DummyRepositoryFactoryBean().afterPropertiesSet())//
+				.isThrownBy(() -> new DummyRepositoryFactoryBean(null))//
 				.withMessageContaining("Repository interface");
 	}
 

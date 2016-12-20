@@ -65,11 +65,11 @@ public class QuerydslBindingsUnitTests {
 	 * @see DATACMNS-669
 	 */
 	@Test
-	public void returnsNullIfNoBindingRegisteredForPath() {
+	public void returnsEmptyOptionalIfNoBindingRegisteredForPath() {
 
 		PathInformation path = PropertyPathInformation.of("lastname", User.class);
 
-		assertThat(bindings.getBindingForPath(path)).isNull();
+		assertThat(bindings.getBindingForPath(path)).isEmpty();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class QuerydslBindingsUnitTests {
 
 		PathInformation path = PropertyPathInformation.of("inceptionYear", User.class);
 
-		assertThat(bindings.getBindingForPath(path)).isNull();
+		assertThat(bindings.getBindingForPath(path)).isEmpty();
 	}
 
 	/**
